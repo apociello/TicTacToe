@@ -38,5 +38,42 @@ function Box() {
     return {getValue, addValue}
 }
 
-const board = GameBoard();
-board.printBoard()
+
+function GameController(player1, player2) {
+    const board = GameBoard();
+
+    const players = [
+        {
+            name: player1,
+            value: 'X'
+        },
+
+        {
+            name: player2,
+            value: 'O'
+        }
+    ]
+
+    let activePlayer = players[0];
+
+    const getActivePlayer = () => activePlayer;
+
+    const switchActivePlayer = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
+
+    const printNewRound = () => {
+        board.printBoard();
+        console.log(`${activePlayer.name}'s turn`)
+    }
+
+    console.log(printNewRound())
+
+    const playRound = (row, column) => {
+        board.chooseBox(row,column, getActivePlayer().value);
+        switchActivePlayer();
+        printNewRound();
+    }
+
+    return {playRound}
+}
