@@ -62,18 +62,47 @@ function GameController(player1, player2) {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
 
+    const checkWinner = () => {
+        const boardWithBoxValues = board.getBoard().map(row => row.map(cell => cell.getValue()))
+        
+        //rows
+        for (const row of boardWithBoxValues) {
+            const equalRow = row.every(val => val === getActivePlayer().value);
+            if (equalRow) {
+                console.log(`WINNER ${getActivePlayer().name}`)
+                return 'yes'
+            }
+        }
+
+        return 'no'
+    }
+
     const printNewRound = () => {
         board.printBoard();
         console.log(`${activePlayer.name}'s turn`)
     }
 
-    console.log(printNewRound())
-
     const playRound = (row, column) => {
         board.chooseBox(row,column, getActivePlayer().value);
+
+        // CHECK WINNER 
+        const winner = checkWinner()
+
+        if (winner === 'yes') {
+            console.log(board.printBoard())
+            
+            return
+        };
+
+
         switchActivePlayer();
         printNewRound();
     }
 
-    return {playRound}
+    console.log(printNewRound())
+
+    return {getActivePlayer, playRound}
 }
+
+
+const game = GameController('poci', 'piur');
