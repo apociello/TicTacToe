@@ -74,6 +74,20 @@ function GameController(player1, player2) {
             }
         }
 
+        //columns
+        for (let column=0; column<3; column++){
+            let columnArray = []
+            for (const row of boardWithBoxValues) {
+                columnArray.push(row[column])
+            }
+
+            const equalColumn = columnArray.every(val => val === getActivePlayer().value)
+            if (equalColumn) {
+                console.log(`WINNER ${getActivePlayer().name}`)
+                return 'yes'
+            }
+        }
+
         return 'no'
     }
 
