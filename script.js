@@ -72,11 +72,8 @@ function GameController(player1, player2) {
         }
 
         //columns
-        for (let column=0; column<3; column++){
-            let columnArray = []
-            for (const row of boardWithBoxValues) {
-                columnArray.push(row[column])
-            }
+        for (let col=0; col<3; col++){
+            let columnArray = boardWithBoxValues.map(row => row[col])
             const equalColumn = columnArray.every(val => val === getActivePlayer().value)
             if (equalColumn) return true;
         }
@@ -90,10 +87,7 @@ function GameController(player1, player2) {
         if (equalDiagonalLr) return true;
         
         //diagonal rigt-left
-        const diagonalArrayRl = [];
-        diagonalArrayRl.push(boardWithBoxValues[0][2]);
-        diagonalArrayRl.push(boardWithBoxValues[1][1]);
-        diagonalArrayRl.push(boardWithBoxValues[2][0]);
+        const diagonalArrayRl = [boardWithBoxValues[0][2], boardWithBoxValues[1][1], boardWithBoxValues[2][0]];
         const equalDiagonalRl = diagonalArrayRl.every(val => val === getActivePlayer().value)
         if (equalDiagonalRl) return true;
     
@@ -123,7 +117,7 @@ function GameController(player1, player2) {
         printNewRound();
     }
 
-    console.log(printNewRound())
+    printNewRound()
 
     return {getActivePlayer, playRound}
 }
