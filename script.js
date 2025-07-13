@@ -6,16 +6,16 @@ function GameBoard() {
     for (let i=0; i<rows; i++) {
         board[i] = [];
         for (let j=0; j<columns; j++) {
-            board[i].push(Box())
+            board[i].push(Cell())
         }
     }
 
     const getBoard = () => board;
 
-    const chooseBox = (row, column, player) => {
-        const box = board[row - 1][column - 1];
-        if (box.getValue() !== '') return;
-        box.addValue(player)
+    const chooseCell = (row, column, player) => {
+        const cell = board[row - 1][column - 1];
+        if (cell.getValue() !== '') return;
+        cell.addValue(player)
     }
     
     const printBoard = () => {
@@ -23,10 +23,10 @@ function GameBoard() {
         console.log(boardWithBoxValues)
     }
 
-    return {getBoard, chooseBox, printBoard}
+    return {getBoard, chooseCell, printBoard}
 }
 
-function Box() {
+function Cell() {
     let value = '';
 
     const addValue = (player) => {
@@ -68,7 +68,7 @@ function GameController(player1, player2) {
         //rows
         for (const row of boardWithBoxValues) {
             const equalRow = row.every(val => val === getActivePlayer().value);
-            if (equalRow) return 'yes'
+            if (equalRow) return true;
         }
 
         //columns
@@ -77,9 +77,8 @@ function GameController(player1, player2) {
             for (const row of boardWithBoxValues) {
                 columnArray.push(row[column])
             }
-
             const equalColumn = columnArray.every(val => val === getActivePlayer().value)
-            if (equalColumn) return 'yes'
+            if (equalColumn) return true;
         }
 
         //diagonal left-rigt
@@ -87,21 +86,19 @@ function GameController(player1, player2) {
         for (let i=0; i<3; i++) {
             diagonalArrayLr.push(boardWithBoxValues[i][i])
         }
-
         const equalDiagonalLr = diagonalArrayLr.every(val => val === getActivePlayer().value)
-            if (equalDiagonalLr) return 'yes'
+        if (equalDiagonalLr) return true;
         
-         //diagonal rigt-left
+        //diagonal rigt-left
         const diagonalArrayRl = [];
         diagonalArrayRl.push(boardWithBoxValues[0][2]);
         diagonalArrayRl.push(boardWithBoxValues[1][1]);
         diagonalArrayRl.push(boardWithBoxValues[2][0]);
-        
         const equalDiagonalRl = diagonalArrayRl.every(val => val === getActivePlayer().value)
-        if (equalDiagonalRl) return 'yes'
+        if (equalDiagonalRl) return true;
     
-        
-        return 'no'
+
+        return false
     }
 
     const printNewRound = () => {
@@ -110,22 +107,17 @@ function GameController(player1, player2) {
     }
 
     const playRound = (row, column) => {
-        if (checkWinner() === 'yes') return;
+        if (checkWinner()) return;
 
-        const boxValue = board.getBoard()[row-1][column-1].getValue();
-        if (boxValue !== '') return 'THAT BOX IS ALREADY CHOSEN!';
-
-        board.chooseBox(row,column, getActivePlayer().value);
+        const cellValue = board.getBoard()[row-1][column-1].getValue();
+        if (cellValue !== '') return 'THAT BOX IS ALREADY CHOSEN!';
+        board.chooseCell(row,column, getActivePlayer().value);
 
         // CHECK WINNER 
-        const winner = checkWinner()
-
-        if (winner === 'yes') {
+        if (checkWinner()) {
             console.log(board.printBoard())
-            
             return `${getActivePlayer().name} WINS!`
         };
-
 
         switchActivePlayer();
         printNewRound();
