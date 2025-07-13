@@ -68,10 +68,7 @@ function GameController(player1, player2) {
         //rows
         for (const row of boardWithBoxValues) {
             const equalRow = row.every(val => val === getActivePlayer().value);
-            if (equalRow) {
-                console.log(`WINNER ${getActivePlayer().name}`)
-                return 'yes'
-            }
+            if (equalRow) return 'yes'
         }
 
         //columns
@@ -82,10 +79,7 @@ function GameController(player1, player2) {
             }
 
             const equalColumn = columnArray.every(val => val === getActivePlayer().value)
-            if (equalColumn) {
-                console.log(`WINNER ${getActivePlayer().name}`)
-                return 'yes'
-            }
+            if (equalColumn) return 'yes'
         }
 
         //diagonal left-rigt
@@ -95,23 +89,17 @@ function GameController(player1, player2) {
         }
 
         const equalDiagonalLr = diagonalArrayLr.every(val => val === getActivePlayer().value)
-            if (equalDiagonalLr) {
-                console.log(`WINNER ${getActivePlayer().name}`)
-                return 'yes'
-            }
+            if (equalDiagonalLr) return 'yes'
         
          //diagonal rigt-left
-           const diagonalArrayRl = [];
-            diagonalArrayRl.push(boardWithBoxValues[0][2]);
-            diagonalArrayRl.push(boardWithBoxValues[1][1]);
-            diagonalArrayRl.push(boardWithBoxValues[2][0]);
+        const diagonalArrayRl = [];
+        diagonalArrayRl.push(boardWithBoxValues[0][2]);
+        diagonalArrayRl.push(boardWithBoxValues[1][1]);
+        diagonalArrayRl.push(boardWithBoxValues[2][0]);
         
         const equalDiagonalRl = diagonalArrayRl.every(val => val === getActivePlayer().value)
-            if (equalDiagonalRl) {
-                console.log(`WINNER ${getActivePlayer().name}`)
-                return 'yes'
-            }
-        
+        if (equalDiagonalRl) return 'yes'
+    
         
         return 'no'
     }
@@ -122,6 +110,11 @@ function GameController(player1, player2) {
     }
 
     const playRound = (row, column) => {
+        if (checkWinner() === 'yes') return;
+
+        const boxValue = board.getBoard()[row-1][column-1].getValue();
+        if (boxValue !== '') return 'THAT BOX IS ALREADY CHOSEN!';
+
         board.chooseBox(row,column, getActivePlayer().value);
 
         // CHECK WINNER 
@@ -130,7 +123,7 @@ function GameController(player1, player2) {
         if (winner === 'yes') {
             console.log(board.printBoard())
             
-            return
+            return `${getActivePlayer().name} WINS!`
         };
 
 
@@ -144,4 +137,4 @@ function GameController(player1, player2) {
 }
 
 
-const game = GameController('poci', 'piur');
+const game = GameController('POCI', 'ALE');
