@@ -88,6 +88,31 @@ function GameController(player1, player2) {
             }
         }
 
+        //diagonal left-rigt
+        const diagonalArrayLr = [];
+        for (let i=0; i<3; i++) {
+            diagonalArrayLr.push(boardWithBoxValues[i][i])
+        }
+
+        const equalDiagonalLr = diagonalArrayLr.every(val => val === getActivePlayer().value)
+            if (equalDiagonalLr) {
+                console.log(`WINNER ${getActivePlayer().name}`)
+                return 'yes'
+            }
+        
+         //diagonal rigt-left
+           const diagonalArrayRl = [];
+            diagonalArrayRl.push(boardWithBoxValues[0][2]);
+            diagonalArrayRl.push(boardWithBoxValues[1][1]);
+            diagonalArrayRl.push(boardWithBoxValues[2][0]);
+        
+        const equalDiagonalRl = diagonalArrayRl.every(val => val === getActivePlayer().value)
+            if (equalDiagonalRl) {
+                console.log(`WINNER ${getActivePlayer().name}`)
+                return 'yes'
+            }
+        
+        
         return 'no'
     }
 
