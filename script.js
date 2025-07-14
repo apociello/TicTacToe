@@ -90,9 +90,15 @@ function GameController(player1, player2) {
         const diagonalArrayRl = [boardWithBoxValues[0][2], boardWithBoxValues[1][1], boardWithBoxValues[2][0]];
         const equalDiagonalRl = diagonalArrayRl.every(val => val === getActivePlayer().value)
         if (equalDiagonalRl) return true;
-    
 
-        return false
+        //draw 
+        for (const row of boardWithBoxValues) {
+            for (const cell of row) {
+                if (cell === '') return false
+            }
+        }
+
+        return 'DRAW'
     }
 
     const printNewRound = () => {
@@ -108,10 +114,13 @@ function GameController(player1, player2) {
         board.chooseCell(row,column, getActivePlayer().value);
 
         // CHECK WINNER 
-        if (checkWinner()) {
+        if (checkWinner() === true) {
             console.log(board.printBoard())
             return `${getActivePlayer().name} WINS!`
-        };
+        } else if (checkWinner() === 'DRAW') {
+            console.log(board.printBoard())
+            return 'DRAW'
+        }
 
         switchActivePlayer();
         printNewRound();
