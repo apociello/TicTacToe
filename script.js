@@ -133,7 +133,7 @@ function GameController(player1, player2) {
 
     printNewRound()
 
-    return {getActivePlayer, playRound, getBoard: board.getBoard}
+    return {getActivePlayer, playRound, getBoard: board.getBoard, checkWinner}
 }
 
 
@@ -150,7 +150,13 @@ const ScreenController = () => {
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer().name
 
-        playerTurnDiv.textContent = `${activePlayer}'s turn`
+        if (game.checkWinner() === true) {
+            playerTurnDiv.textContent = `${activePlayer} WINS!`
+        } else if (game.checkWinner() === 'DRAW') {
+            playerTurnDiv.textContent = 'DRAW'
+        } else {
+            playerTurnDiv.textContent = `${activePlayer}'s turn`
+        }
 
         //render board squares
         board.forEach((row, rowIndex) => {
