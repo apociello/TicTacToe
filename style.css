@@ -7,6 +7,15 @@
   src: url('../fonts/russo-one-v17-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+/* comfortaa-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/comfortaa-v46-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -43,6 +52,12 @@ body{
     border: none;
 }
 
-button {
-    font-size: 3rem;
+button.cell{
+    font-size: 4.5rem;
+    padding-top: 0.8rem;
+    font-family: 'Comfortaa';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
