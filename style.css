@@ -42,3 +42,7 @@ body{
     gap: 2px;
     border: none;
 }
+
+button {
+    font-size: 3rem;
+}
