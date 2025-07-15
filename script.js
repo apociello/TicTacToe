@@ -139,8 +139,11 @@ function GameController(player1, player2) {
 
 const ScreenController = () => {
     const game = GameController('X', 'O');
-    const playerTurnDiv = document.querySelector('.turn')
-    const boardDiv = document.querySelector('.board')
+    const playerTurnDiv = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
+    const resetBtn = document.querySelector('#restart')
+    resetBtn.addEventListener('click', () => ScreenController())
+
 
     const updateScreen = () => {
         boardDiv.textContent = '';
