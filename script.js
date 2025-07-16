@@ -17,13 +17,8 @@ function GameBoard() {
         if (cell.getValue() !== '') return;
         cell.addValue(player)
     }
-    
-    const printBoard = () => {
-        const boardWithBoxValues = board.map(row => row.map(cell => cell.getValue()))
-        console.log(boardWithBoxValues)
-    }
 
-    return {getBoard, chooseCell, printBoard}
+    return {getBoard, chooseCell}
 }
 
 function Cell() {
@@ -37,7 +32,6 @@ function Cell() {
 
     return {getValue, addValue}
 }
-
 
 function GameController(player1, player2) {
     const board = GameBoard();
@@ -101,41 +95,29 @@ function GameController(player1, player2) {
         return 'DRAW'
     }
 
-    const printNewRound = () => {
-        board.printBoard();
-        console.log(`${activePlayer.name}'s turn`)
-    }
 
     const playRound = (row, column) => {
         if (checkWinner()) return;
 
         const cellValue = board.getBoard()[row][column].getValue();
         if (cellValue !== '') {
-            console.log('THAT BOX IS ALREADY CHOSEN!');
             return
         } 
         board.chooseCell(row,column, getActivePlayer().value);
 
         // CHECK WINNER 
-        if (checkWinner() === true) {
-            console.log(board.printBoard())
-            console.log(`${getActivePlayer().name} WINS!`);
+        const winner = checkWinner()
+        if (winner === true) {
             return
-        } else if (checkWinner() === 'DRAW') {
-            console.log(board.printBoard())
-            console.log('DRAW')
+        } else if (winner === 'DRAW') {
             return 
         }
 
         switchActivePlayer();
-        printNewRound();
     }
-
-    printNewRound()
 
     return {getActivePlayer, playRound, getBoard: board.getBoard, checkWinner}
 }
-
 
 const ScreenController = () => {
     const game = GameController('X', 'O');
@@ -149,10 +131,10 @@ const ScreenController = () => {
         boardDiv.textContent = '';
         const board = game.getBoard();
         const activePlayer = game.getActivePlayer().name
-
-        if (game.checkWinner() === true) {
+        const winner = game.checkWinner()
+        if (winner === true) {
             playerTurnDiv.textContent = `${activePlayer} WINS!`
-        } else if (game.checkWinner() === 'DRAW') {
+        } else if (winner === 'DRAW') {
             playerTurnDiv.textContent = 'DRAW'
         } else {
             playerTurnDiv.textContent = `${activePlayer}'s turn`
