@@ -1,17 +1,17 @@
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Russo One';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../fonts/russo-one-v17-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Comfortaa';
   font-style: normal;
   font-weight: 400;
   src: url('../fonts/comfortaa-v46-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/baloo-2-v22-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 * {
@@ -32,7 +32,7 @@ body{
 
 .container{
     width: 700px;
-    height: 800px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,10 +61,11 @@ button.cell{
     cursor: pointer;
 }
 
-button {
-    font-size: 1.5rem;
+button#restart {
+    font-size: 1.7rem;
     margin-top: 5rem;
-    font-family: 'Russo One';
-    padding: 1rem;
+    font-family: 'Baloo 2';
+    padding: 0.4rem 1rem;
+    border: none;
     border-radius: 5px;
 }
