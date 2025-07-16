@@ -120,12 +120,16 @@ function GameController(player1, player2) {
 }
 
 const ScreenController = () => {
-    const game = GameController('X', 'O');
+    let game = GameController('X', 'O');
     const playerTurnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
     const resetBtn = document.querySelector('#restart')
-    resetBtn.addEventListener('click', () => ScreenController())
+    resetBtn.addEventListener('click', () => resetGame())
 
+    function resetGame() {
+        game = GameController('X', 'O');  // crea nuevo juego
+        updateScreen();
+    }
 
     const updateScreen = () => {
         boardDiv.textContent = '';
