@@ -3,7 +3,7 @@
   font-family: 'Comfortaa';
   font-style: normal;
   font-weight: 400;
-  src: url('/fonts/comfortaa-v46-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('fonts/comfortaa-v46-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-family: 'Baloo 2';
   font-style: normal;
   font-weight: 400;
-  src: url('/fonts/baloo-2-v22-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('fonts/baloo-2-v22-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 * {
