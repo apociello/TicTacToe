@@ -149,11 +149,11 @@ const ScreenController = () => {
 
             row.forEach((cell, colIndex) => {
             const divButton = document.createElement('button');
-            divButton.textContent = cell.getValue()
-            divButton.addEventListener('click', clickHandlerBoard)
             divButton.classList.add('cell')
             divButton.dataset.row = rowIndex
             divButton.dataset.col = colIndex
+            divButton.textContent = cell.getValue()
+            divButton.addEventListener('click', clickHandlerBoard)
             boardDiv.append(divButton)
         })
         })
